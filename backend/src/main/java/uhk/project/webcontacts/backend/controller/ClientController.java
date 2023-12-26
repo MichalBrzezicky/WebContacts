@@ -14,6 +14,13 @@ public class ClientController {
     public String hello_world() {
         return "Hello World";
     }
+
+    @RequestMapping("/auth")
+    public String auth_test() {
+        return "Auth test";
+    }
+
+
     /*
 
     @RequestMapping("/users")

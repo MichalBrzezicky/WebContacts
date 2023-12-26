@@ -2,11 +2,13 @@ package uhk.project.webcontacts.backend.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity(name = "PhoneNumber")
 @Table(name = "phone_numbers")
+@Data()
 public class PhoneNumber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +23,4 @@ public class PhoneNumber {
 
     @ManyToMany(mappedBy = "phoneNumbers", cascade = CascadeType.ALL)
     private List<Contact> contacts;
-
-    public String getCodeArea() {
-        return codeArea;
-    }
-
-    public void setCodeArea(String codeArea) {
-        this.codeArea = codeArea;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 }

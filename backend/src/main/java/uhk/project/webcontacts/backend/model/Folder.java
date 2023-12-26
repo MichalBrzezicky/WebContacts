@@ -2,11 +2,13 @@ package uhk.project.webcontacts.backend.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity(name = "Folder")
 @Table(name = "folders")
+@Data()
 public class Folder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,29 +25,4 @@ public class Folder {
     @Size(max = 100, min = 1, message = "Název musí být delší. Maximálně však 100 znaků")
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

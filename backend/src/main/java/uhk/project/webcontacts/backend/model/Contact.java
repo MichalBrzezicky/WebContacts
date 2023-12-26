@@ -2,11 +2,13 @@ package uhk.project.webcontacts.backend.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity(name = "Contact")
 @Table(name = "contacts")
+@Data()
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +30,4 @@ public class Contact {
     @ManyToOne
     @JoinColumn(name = "folder_id")
     private Folder folder;
-
-    public List<PhoneNumber> getPhoneNumbers() {
-        return phoneNumbers;
-    }
-
-    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-        this.phoneNumbers = phoneNumbers;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
