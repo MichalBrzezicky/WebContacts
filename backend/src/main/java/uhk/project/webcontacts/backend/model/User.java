@@ -11,7 +11,6 @@ public class User {
 
     private String name;
     private String surname;
-    private String phone;
     private String email;
     private String password;
 
@@ -37,14 +36,6 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getEmail() {
