@@ -2,6 +2,8 @@ package uhk.project.webcontacts.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity(name = "User")
 @Table(
         name = "users",
@@ -23,17 +25,8 @@ public class User {
     private String email;
     @Column(name = "password", nullable = false, columnDefinition = "TEXT")
     private String password;
-
-    public User(String name, String surname, String email, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User() {
-
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Folder> folders;
 
     public Long getId() {
         return id;
