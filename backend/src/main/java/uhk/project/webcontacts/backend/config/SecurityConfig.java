@@ -25,6 +25,7 @@ public class SecurityConfig {
                 )
                 .headers(headers->headers.frameOptions(Customizer.withDefaults()).disable())
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
