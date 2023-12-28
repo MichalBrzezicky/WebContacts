@@ -19,6 +19,8 @@ public class User {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @Column(name = "roles", nullable = false, columnDefinition = "TEXT")
+    private String roles;
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
     @Column(name = "surname", nullable = false, columnDefinition = "TEXT")

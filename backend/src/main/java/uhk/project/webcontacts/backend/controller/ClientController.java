@@ -10,7 +10,7 @@ public class ClientController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     public String hello_world() {
         return "Hello World";
     }
