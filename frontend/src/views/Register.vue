@@ -1,12 +1,11 @@
 <template>
   <div>
-    Inside Home component by router ...
+    Inside Register page...
   </div>
-
 </template>
 
 <script>
   export default {
-    name: 'Home',
+    name: 'Register',
   }
 </script>
