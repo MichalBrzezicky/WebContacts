@@ -1,4 +1,4 @@
-package uhk.project.webcontacts.backend;
+package uhk.project.webcontacts.backend.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

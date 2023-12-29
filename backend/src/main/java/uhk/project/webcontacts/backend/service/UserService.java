@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import uhk.project.webcontacts.backend.config.UserPrincipal;
 import uhk.project.webcontacts.backend.model.User;
 import uhk.project.webcontacts.backend.repository.UserRepository;
+import uhk.project.webcontacts.backend.system.exception.ObjectNotFoundException;
 
 import java.util.List;
 
@@ -30,24 +31,34 @@ public class UserService implements BaseService<User>, UserDetailsService {
 
     @Override
     public User getById(long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(
+                () -> new ObjectNotFoundException("User", id)
+        );
     }
 
     @Override
     public List<User> getAll() {
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public void delete(long id) {
+        userRepository.findById(id).orElseThrow(
+                () -> new ObjectNotFoundException("User", id)
+        );
         userRepository.deleteById(id);
     }
 
-
-    // TODO implementation
     @Override
-    public User update(User entity) {
-        return null;
+    public User update(long id, User entity) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new ObjectNotFoundException("User", id)
+        );
+        user.setName(entity.getName());
+        user.setSurname(entity.getSurname());
+        user.setEmail(entity.getEmail());
+        user.setRoles(entity.getRoles());
+        return this.userRepository.save(user);
     }
 
     @Override

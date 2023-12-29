@@ -1,5 +1,6 @@
 package uhk.project.webcontacts.backend.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,12 +16,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Value("${api.endpoint.base-url}")
+    private String baseUrl;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/tmp/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/auth/**").hasAuthority("ROLE_admin")
+                        .requestMatchers(HttpMethod.GET, baseUrl + "/tmp/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, baseUrl + "/users/**").hasAuthority("ROLE_admin")
                         .anyRequest().authenticated()
                 )
                 .headers(headers->headers.frameOptions(Customizer.withDefaults()).disable())

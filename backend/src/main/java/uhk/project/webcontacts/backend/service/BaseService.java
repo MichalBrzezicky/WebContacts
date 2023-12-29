@@ -10,5 +10,5 @@ public interface BaseService<T> {
     T getById(long id);
     List<T> getAll();
     void delete(long id);
-    T update(T entity);
+    T update(long id, T entity);
 }
