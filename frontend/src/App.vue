@@ -1,9 +1,9 @@
 <template>
   <v-app class="d-flex">
     <Navigation/>
-    <v-container class="mt-16 d-block">
+    <v-main class="ma-5">
       <router-view/>
-    </v-container>
+    </v-main>
   </v-app>
 </template>
 
