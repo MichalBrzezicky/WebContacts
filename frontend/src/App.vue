@@ -1,16 +1,17 @@
 <template>
-  <div id="app" class="wrapper">
-    Here should be navbar
-    <div class="main_content">
+  <v-app>
+    <Navigation/>
+    <v-main>
       <router-view/>
-    </div>
-  </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue'
-  import TheWelcome from './components/TheWelcome.vue'
+  import Navigation from "@/components/Navigation.vue";
+
   export default {
     name: "App",
+    components: {Navigation},
   }
 </script>
