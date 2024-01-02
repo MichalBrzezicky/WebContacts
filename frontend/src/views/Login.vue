@@ -15,7 +15,9 @@
           </v-card-text>
 
           <v-card-actions class="justify-center">
-            <router-link to="/registration">Ještě nemáte účet? Zaregistrujte se.</router-link>
+            <router-link to="/registration">
+              Ještě nemáte účet? <span class="text-decoration-underline">Zaregistrujte se</span>.
+            </router-link>
           </v-card-actions>
         </v-card>
       </v-col>
