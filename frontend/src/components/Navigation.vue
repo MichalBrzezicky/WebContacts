@@ -8,7 +8,7 @@
 
     <v-app-bar-title>Moje webové kontakty</v-app-bar-title>
 
-    <div class="text-right">
+    <div class="text-right mr-5">
       <v-btn variant="text" icon="mdi-account"/>
 
       <v-btn variant="text" icon="mdi-logout"/>
