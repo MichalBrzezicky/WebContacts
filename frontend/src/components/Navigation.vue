@@ -6,13 +6,14 @@
 
     <v-app-bar-title>Moje webové kontakty</v-app-bar-title>
 
-    <v-spacer></v-spacer>
+    <div class="text-right">
+      <v-btn variant="text" icon="mdi-account"/>
 
-    <v-btn variant="text" icon="mdi-account"/>
+      <v-btn variant="text" icon="mdi-logout"/>
 
-    <v-btn variant="text" icon="mdi-logout"/>
+      <v-btn variant="text" icon="mdi-login"/>
+    </div>
 
-    <v-btn variant="text" icon="mdi-login"/>
   </v-app-bar>
 </template>
 
