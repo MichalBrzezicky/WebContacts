@@ -1,7 +1,9 @@
 <template>
   <v-app-bar :elevation="8" color="primary">
     <v-app-bar-nav-icon>
-      <v-icon variant="text" icon="mdi-phone-log"></v-icon>
+      <router-link :to="'/'" >
+        <v-icon variant="text" color="white" icon="mdi-phone-log"></v-icon>
+      </router-link>
     </v-app-bar-nav-icon>
 
     <v-app-bar-title>Moje webové kontakty</v-app-bar-title>

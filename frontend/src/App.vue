@@ -1,7 +1,7 @@
 <template>
   <v-app class="d-flex">
     <Navigation/>
-    <v-main class="ma-5">
+    <v-main>
       <router-view/>
     </v-main>
   </v-app>

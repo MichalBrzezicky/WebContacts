@@ -12,9 +12,10 @@
               <v-text-field label="Email" type="email" placeholder="mail@example.com" required></v-text-field>
               <v-text-field  label="Heslo" type="password" required></v-text-field>
             </v-form>
-
             <v-btn class="ml-2" color="primary">Potvrdit</v-btn>
           </v-card-text>
+
+          <v-divider />
 
           <v-card-actions class="justify-center">
             <router-link to="/login">

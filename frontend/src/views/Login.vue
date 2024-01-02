@@ -10,9 +10,10 @@
               <v-text-field label="Email" placeholder="mail@example.com" required></v-text-field>
               <v-text-field  label="Heslo" type="password" required></v-text-field>
             </v-form>
-
             <v-btn class="ml-2" color="primary">Přihlásit se</v-btn>
           </v-card-text>
+
+          <v-divider />
 
           <v-card-actions class="justify-center">
             <router-link to="/registration">
