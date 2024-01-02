@@ -65,6 +65,10 @@ public class UserService implements BaseService<User>, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
                 .map(UserPrincipal::new)
-                .orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("Uživatel s emailem " + username + " nebyl nalezen!"));
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 }

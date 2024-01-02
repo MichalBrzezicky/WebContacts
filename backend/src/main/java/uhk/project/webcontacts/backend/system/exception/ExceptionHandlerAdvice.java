@@ -14,7 +14,7 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler({UsernameNotFoundException.class, BadCredentialsException.class})
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     Result handleAuthenticationException(Exception ex) {
-        return new Result(false, StatusCode.UNAUTHORIZED, "Username or password is incorrect.", ex.getMessage());
+        return new Result(false, StatusCode.UNAUTHORIZED, "Email nebo heslo není správné.", ex.getMessage());
     }
 
     @ExceptionHandler(ObjectNotFoundException.class)
