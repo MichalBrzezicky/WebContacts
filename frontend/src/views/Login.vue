@@ -6,11 +6,17 @@
           <v-card-title class="text-h6 mb-6">Přihlášení</v-card-title>
 
           <v-card-text class="text-right">
-            <v-form>
-              <v-text-field label="Email" placeholder="mail@example.com" required></v-text-field>
-              <v-text-field  label="Heslo" type="password" required></v-text-field>
-            </v-form>
-            <v-btn class="ml-2" color="primary">Přihlásit se</v-btn>
+            <v-alert v-if="error"
+              class="text-left"
+              density="compact"
+              type="error"
+              variant="tonal"
+              :text="error"
+            ></v-alert>
+
+            <v-text-field v-model="user.email" type="email" label="Email" placeholder="mail@example.com" required></v-text-field>
+            <v-text-field v-model="user.password" label="Heslo" type="password" required></v-text-field>
+            <v-btn :disabled="!isFormFilled" @click="handleSubmit" class="ml-2" color="primary">Přihlásit se</v-btn>
           </v-card-text>
 
           <v-divider />
@@ -29,5 +35,49 @@
 <script>
   export default {
     name: 'Login',
+    data() {
+      return {
+        submitted: false,
+        loading: false,
+        returnUrl: '',
+        error: '',
+        user: {
+          email: '',
+          password: '',
+        }
+      }
+    },
+
+    created () {
+      this.$store.dispatch('auth/logout');
+      this.returnUrl = this.$route.query.returnUrl || '/';
+    },
+
+    computed: {
+      isFormFilled() {
+        return this.user?.email && this.user.password
+      }
+    },
+
+    methods: {
+      handleSubmit() {
+        this.submitted = true;
+
+        if (!this.isFormFilled) {
+          this.error = 'Pro pokračování zadejte email a heslo'
+          return;
+        }
+
+        this.loading = true;
+        this.$store.dispatch("auth/login", this.user).then(
+          data => this.$router.push(this.returnUrl),
+          error => {
+            console.log(error)
+            this.error = error?.response?.data?.message || 'Nastala neočekávaná chyba';
+            this.loading = false;
+          }
+        )
+      },
+    }
   }
 </script>
