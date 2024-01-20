@@ -14,8 +14,8 @@
               :text="error"
             ></v-alert>
 
-            <v-text-field v-model="user.email" type="email" label="Email" placeholder="mail@example.com" required></v-text-field>
-            <v-text-field v-model="user.password" label="Heslo" type="password" required></v-text-field>
+            <v-text-field v-model="user.email" type="email" label="Email" placeholder="mail@example.com" required />
+            <v-text-field v-model="user.password" label="Heslo" type="password" required />
             <v-btn :disabled="!isFormFilled" @click="handleSubmit" class="ml-2" color="primary">Přihlásit se</v-btn>
           </v-card-text>
 

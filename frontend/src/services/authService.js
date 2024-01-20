@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "@/helpers";
 
+const AUTH_API_URL = API_URL + 'auth/'
 
 class AuthService {
   login (user) {
@@ -9,16 +10,12 @@ class AuthService {
       password: user.password
     };
     return axios.get(
-      API_URL + 'login', {
+      AUTH_API_URL + 'login', {
         params,
         headers: { 'Content-Type': 'application/json'}
       }).then(response => {
-        console.log('RESPONSE', response)
       if (response?.data) {
-        const userStore = {...response.data};
-        userStore.authData = window.btoa(userStore.email + ':' + userStore.password);
-        localStorage.setItem('user', JSON.stringify(userStore));
-        return Promise.resolve(userStore);
+        return this.refreshAuthData(response.data)
       }
       return Promise.reject("Něco se pokazilo!");
     }).catch((e) => {
@@ -27,23 +24,23 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + 'signup',
-      {
-        email: user.email,
-        password: user.password
-      });
+    return axios.post(AUTH_API_URL + 'signup', user).then((response) => {
+      return this.refreshAuthData(user)
+    }).catch((e) => {
+      return Promise.reject(e)
+    })
   }
 
   logout () {
-    localStorage.removeItem('user');
+    localStorage.removeItem('user')
   }
 
   refreshAuthData (user) {
-    const userStore = {...user};
-    userStore.authData = window.btoa(user.email + ':' + user.password);
-    localStorage.setItem('user', JSON.stringify(userStore));
-    return Promise.resolve(userStore);
+    const userStore = {...user}
+    userStore.authData = window.btoa(user.email + ':' + user.password)
+    localStorage.setItem('user', JSON.stringify(userStore))
+    return Promise.resolve(userStore)
   }
 }
 
-export default new AuthService();
+export default new AuthService()
