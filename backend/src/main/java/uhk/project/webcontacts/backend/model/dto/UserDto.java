@@ -17,5 +17,4 @@ public class UserDto {
     private String name;
     @NotEmpty(message = "Příjmení je povinný údaj.")
     private String surname;
-    private List<Folder> folders;
 }
