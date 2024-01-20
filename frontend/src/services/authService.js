@@ -25,9 +25,9 @@ class AuthService {
 
   register(user) {
     return axios.post(AUTH_API_URL + 'signup', user).then((response) => {
-      return this.refreshAuthData(user)
+      return this.refreshAuthData(response.data?.data)
     }).catch((e) => {
-      return Promise.reject(e)
+      return Promise.reject("Něco se pokazilo!")
     })
   }
 

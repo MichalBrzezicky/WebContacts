@@ -54,7 +54,7 @@
 
     created() {
       this.$store.dispatch("auth/logout")
-      this.returnUrl = this.$route.query.returnUrl || '/'
+      this.returnUrl = this.$route?.query?.returnUrl || '/'
     },
 
     computed: {
