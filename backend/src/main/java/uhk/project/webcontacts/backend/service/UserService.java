@@ -26,6 +26,7 @@ public class UserService implements BaseService<User>, UserDetailsService {
     @Override
     public User add(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles("user");
         return userRepository.save(user);
     }
 
