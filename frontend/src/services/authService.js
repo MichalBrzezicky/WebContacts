@@ -15,7 +15,7 @@ class AuthService {
         headers: { 'Content-Type': 'application/json'}
       }).then(response => {
       if (response?.data) {
-        return this.refreshAuthData(response.data)
+        return this.refreshAuthData({...response.data, password: user.password})
       }
       return Promise.reject("Něco se pokazilo!");
     }).catch((e) => {
@@ -37,6 +37,7 @@ class AuthService {
 
   refreshAuthData (user) {
     const userStore = {...user}
+    console.log('EMAIL, PASSWORD AUTH', user.email, user.password)
     userStore.authData = window.btoa(user.email + ':' + user.password)
     localStorage.setItem('user', JSON.stringify(userStore))
     return Promise.resolve(userStore)

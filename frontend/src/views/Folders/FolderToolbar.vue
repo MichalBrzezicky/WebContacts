@@ -19,11 +19,12 @@
       </v-btn>
     </div>
   </v-card>
-
 </template>
 
-<script setup>
-
+<script>
+  export default {
+    name: 'FolderToolbar'
+  }
 </script>
 
 <style scoped>

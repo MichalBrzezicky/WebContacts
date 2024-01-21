@@ -24,7 +24,6 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers( baseUrl + "/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, baseUrl + "/users/**").hasAuthority("ROLE_admin")
                         .anyRequest().authenticated()
                 )
                 .headers(headers->headers.frameOptions(Customizer.withDefaults()).disable())

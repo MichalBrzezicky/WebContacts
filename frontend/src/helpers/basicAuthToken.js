@@ -7,3 +7,10 @@ export function basicAuthToken() {
     return ''
   }
 }
+
+export function requestHeaders () {
+  return {
+    'Authorization': basicAuthToken(),
+    'Access-Control-Allow-Origin': '*',
+  }
+}

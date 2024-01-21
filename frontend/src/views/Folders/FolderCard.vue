@@ -5,5 +5,8 @@
   </v-card>
 </template>
 
-<script setup>
+<script>
+  export default {
+    name: 'FolderCard'
+  }
 </script>

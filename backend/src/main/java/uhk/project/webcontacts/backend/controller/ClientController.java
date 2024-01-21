@@ -23,22 +23,22 @@ public class ClientController {
 
     /*
 
-    @RequestMapping("/users")
+    @RequestMapping("/all")
     public List<User> getUsers() {
         return userService.getUsers();
     }
 
-    @RequestMapping("/user")
+    @RequestMapping
     public User getUserById(long id) {
         return userService.getUserById(id);
     }
 
-    @RequestMapping("/addUser")
+    @RequestMapping("/add")
     public User addUser(User user) {
         return userService.addUser(user);
     }
 
-    @RequestMapping("/deleteUser")
+    @RequestMapping("/delete")
     public void deleteUser(long id) {
         userService.deleteUser(id);
     }*/

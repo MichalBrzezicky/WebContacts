@@ -2,13 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import store from "@/store"
 import Login from "@/views/Login.vue"
 import Registration from "@/views/Registration.vue"
-import Directory from "@/views/UserDirectories/Directory.vue"
+import Folder from "@/views/Folders/Folder.vue"
 
 const routes = [
   {
     path: '/',
-    name: "Directory",
-    component: Directory
+    name: "Folder",
+    component: Folder
   },
   {
     path: '/login',
