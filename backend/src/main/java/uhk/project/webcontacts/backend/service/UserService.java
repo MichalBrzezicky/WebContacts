@@ -38,7 +38,7 @@ public class UserService implements BaseService<User>, UserDetailsService {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll(long id) {
         return userRepository.findAll();
     }
 
@@ -59,7 +59,7 @@ public class UserService implements BaseService<User>, UserDetailsService {
         user.setSurname(entity.getSurname());
         user.setEmail(entity.getEmail());
         user.setRoles(entity.getRoles());
-        return this.userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override

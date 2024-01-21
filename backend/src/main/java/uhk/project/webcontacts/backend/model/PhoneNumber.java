@@ -14,13 +14,16 @@ public class PhoneNumber {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
+
     @Size(max = 3, min = 3, message = "Předčíslí musí obsahovat přesně 3 čísla")
     @Column(name = "codeArea", nullable = false, columnDefinition = "TEXT")
     private String codeArea;
+
     @Size(max = 9, min = 9, message = "Telefonní číslo musí obsahovat přesně 9 čísel")
     @Column(name = "number", nullable = false, columnDefinition = "TEXT")
     private String number;
 
-    @ManyToMany(mappedBy = "phoneNumbers", cascade = CascadeType.ALL)
-    private List<Contact> contacts;
+    @ManyToOne
+    @JoinColumn(name = "contact_id")
+    private Contact contact;
 }

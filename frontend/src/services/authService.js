@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL} from "@/helpers";
+import { API_URL } from "@/helpers";
 
 const AUTH_API_URL = API_URL + 'auth/'
 
