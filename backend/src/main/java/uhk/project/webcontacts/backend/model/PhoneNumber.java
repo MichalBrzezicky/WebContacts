@@ -1,5 +1,6 @@
 package uhk.project.webcontacts.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class PhoneNumber {
     @Column(name = "number", nullable = false, columnDefinition = "TEXT")
     private String number;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "contact_id")
     private Contact contact;

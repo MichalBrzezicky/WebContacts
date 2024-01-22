@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uhk.project.webcontacts.backend.model.Folder;
+import uhk.project.webcontacts.backend.model.User;
 import uhk.project.webcontacts.backend.repository.FolderRepository;
 import uhk.project.webcontacts.backend.system.exception.ObjectNotFoundException;
 
@@ -29,7 +30,11 @@ public class FolderService implements BaseService<Folder> {
 
     @Override
     public List<Folder> getAll(long userId) {
-        return folderRepository.findAllByUserId(userId);
+        return folderRepository.findByUserId(userId);
+    }
+
+    public List<Folder> getAll(User user) {
+        return folderRepository.findByUser(user);
     }
 
     @Override
@@ -46,6 +51,7 @@ public class FolderService implements BaseService<Folder> {
                 () -> new ObjectNotFoundException("Folder", id)
         );
         folder.setName(entity.getName());
+        folder.setTitle(entity.getTitle());
         return folderRepository.save(folder);
     }
 }

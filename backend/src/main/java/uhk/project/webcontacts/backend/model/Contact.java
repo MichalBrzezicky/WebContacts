@@ -1,5 +1,6 @@
 package uhk.project.webcontacts.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Contact {
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "folder_id")
     private Folder folder;

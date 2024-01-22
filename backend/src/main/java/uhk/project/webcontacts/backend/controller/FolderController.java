@@ -1,10 +1,12 @@
 package uhk.project.webcontacts.backend.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import uhk.project.webcontacts.backend.config.UserPrincipal;
 import uhk.project.webcontacts.backend.model.Folder;
+import uhk.project.webcontacts.backend.model.User;
 import uhk.project.webcontacts.backend.service.FolderService;
 import uhk.project.webcontacts.backend.system.Result;
 import uhk.project.webcontacts.backend.system.StatusCode;
@@ -18,7 +20,7 @@ public class FolderController {
     private FolderService folderService;
 
     @PostMapping("/add")
-    public Result addFolder(Folder folder, @AuthenticationPrincipal UserPrincipal userDetails) {
+    public Result addFolder(@Valid @RequestBody Folder folder, @AuthenticationPrincipal UserPrincipal userDetails) {
         folder.setUser(userDetails.getUser());
         Folder savedFolder = folderService.add(folder);
         return new Result(true, StatusCode.SUCCESS, "Složka byla úspěšně vytvořena", savedFolder);
@@ -31,7 +33,8 @@ public class FolderController {
 
     @GetMapping("/all")
     public List<Folder> getFolders(@AuthenticationPrincipal UserPrincipal userDetails) {
-        return folderService.getAll(userDetails.getUser().getId());
+        User user = userDetails.getUser();
+        return folderService.getAll(userDetails.getUser());
     }
 
     @PostMapping("/update")

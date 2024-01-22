@@ -1,8 +1,8 @@
 <template>
   <div>
     <FolderToolbar class="mb-5"/>
-    <v-row v-if="directories" class="mx-2">
-      <v-col v-for="(directory, index) in directories" :key="index" :cols="4">
+    <v-row v-if="folders" class="mx-2">
+      <v-col v-for="(folder, index) in folders" :key="index" :cols="4">
         <v-badge
           :offset-x="25"
           class="d-block"
@@ -14,7 +14,7 @@
 
       </v-col>
     </v-row>
-    <NoData/>
+    <NoData v-else/>
   </div>
 </template>
 
@@ -23,27 +23,31 @@ import FolderCard from "@/views/Folders/FolderCard.vue";
 import FolderToolbar from "@/views/Folders/FolderToolbar.vue";
 import NoData from "@/components/NoData.vue"
 import FolderService from "@/services/folderService.js";
+import FolderDialog from "@/views/Folders/dialogs/FolderDialog.vue";
 
 export default {
   name: 'Directory',
-  components: { FolderCard, FolderToolbar, NoData },
+  components: {FolderDialog, FolderCard, FolderToolbar, NoData },
 
   data() {
     return {
-      directories: [],
+      folderDialog: false,
+      folders: [],
     }
   },
 
   methods: {
-    async fetchDirectories() {
+    fetchDirectories() {
       FolderService.getAll({}).then(result => {
-        console.log('RESULT::::', result)
+          if (result?.data) {
+            this.folders = result.data
+          }
         })
     }
   },
 
-  async created() {
-    await this.fetchDirectories()
+  created() {
+    this.fetchDirectories()
   }
 }
 </script>
