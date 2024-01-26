@@ -2,7 +2,7 @@
   <v-dialog v-model="visible" width="500">
       <v-card>
         <v-card-title>
-          <template v-if="folderVal.id">Editace složky</template>
+          <template v-if="isEditation">Editace složky</template>
           <template v-else>Nová složka</template>
         </v-card-title>
         <v-divider />
@@ -43,15 +43,6 @@
       }
     },
 
-    watch: {
-      folderVal: {
-        handler(newVal, oldVal) {
-          console.log('NEW, OLD', newVal, oldVal)
-        },
-        deep: true
-      },
-    },
-
     computed: {
       visible: {
         get() {
@@ -64,6 +55,10 @@
 
       isFormFilled() {
         return this.folderVal.name && this.folderVal.title
+      },
+
+      isEditation() {
+        return !!this.folderVal.id
       }
     },
 
@@ -73,14 +68,22 @@
       },
 
       submit() {
-        if (this.isFormFilled) this.saveFolder()
+        if (!this.isFormFilled) return
+        if (this.isEditation) {
+          this.editFolder()
+        } else {
+          this.saveFolder()
+        }
       },
+
+      editFolder() {},
 
       saveFolder() {
         this.loading = true
         FolderService.add(this.folderVal).then((res) => {
-          console.log(res)
           this.loading = false
+          this.closeDialog()
+          this.$emit('onSubmit')
         })
       }
     },

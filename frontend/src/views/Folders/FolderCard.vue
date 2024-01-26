@@ -1,12 +1,20 @@
 <template>
   <v-card :color="'primary'" :variant="'tonal'">
-    <v-card-title>Název složky</v-card-title>
-    <v-card-text>Text...</v-card-text>
+    <v-card-title>{{ folder.name }}</v-card-title>
+    <v-divider />
+    <v-card-text>{{ folder.title }}</v-card-text>
   </v-card>
 </template>
 
 <script>
   export default {
-    name: 'FolderCard'
+    name: 'FolderCard',
+    props: {
+      folder: {
+        type: Object,
+        required: true,
+      }
+    }
+
   }
 </script>

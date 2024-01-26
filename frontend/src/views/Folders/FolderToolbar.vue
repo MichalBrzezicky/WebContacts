@@ -19,7 +19,7 @@
       </v-btn>
     </div>
 
-    <FolderDialog :value="folderDialog" @onClose="closeDialog" />
+    <FolderDialog v-if="folderDialog" :value="folderDialog" @onClose="closeDialog" @onSubmit="$emit('onSubmit')" />
   </v-card>
 </template>
 

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <FolderToolbar class="mb-5"/>
+    <FolderToolbar class="mb-5" @onSubmit="refreshDirectories"/>
     <v-row v-if="folders" class="mx-2">
       <v-col v-for="(folder, index) in folders" :key="index" :cols="4">
         <v-badge
           :offset-x="25"
           class="d-block"
           color="error"
-          content="5"
+          :content="folder.contacts.length.toString()"
         >
-          <FolderCard class="w-100"/>
+          <FolderCard class="w-100" :folder="folder" />
         </v-badge>
 
       </v-col>
@@ -26,7 +26,7 @@ import FolderService from "@/services/folderService.js";
 import FolderDialog from "@/views/Folders/dialogs/FolderDialog.vue";
 
 export default {
-  name: 'Directory',
+  name: 'FolderList',
   components: {FolderDialog, FolderCard, FolderToolbar, NoData },
 
   data() {
@@ -43,6 +43,10 @@ export default {
             this.folders = result.data
           }
         })
+    },
+
+    refreshDirectories() {
+      this.fetchDirectories()
     }
   },
 
