@@ -38,7 +38,7 @@ public class FolderController {
     }
 
     @PostMapping("/update")
-    public Result updateFolder(long id, Folder folder) {
+    public Result updateFolder(long id, @Valid @RequestBody Folder folder) {
         Folder updatedFolder = folderService.update(id, folder);
         return new Result(true, StatusCode.SUCCESS, "Složka byla aktualizovaná", updatedFolder);
     }

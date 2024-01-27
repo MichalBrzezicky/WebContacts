@@ -3,12 +3,18 @@ import store from "@/store"
 import Login from "@/views/Login.vue"
 import Registration from "@/views/Registration.vue"
 import FolderList from "@/views/Folders/FolderList.vue"
+import ContactList from "@/views/Contacts/ContactList.vue";
 
 const routes = [
   {
     path: '/',
     name: "FolderList",
     component: FolderList
+  },
+  {
+    path: '/folder/:id',
+    name: "ContactList",
+    component: ContactList
   },
   {
     path: '/login',

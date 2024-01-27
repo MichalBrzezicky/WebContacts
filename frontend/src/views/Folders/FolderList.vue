@@ -1,9 +1,9 @@
 <template>
   <div>
     <FolderToolbar class="mb-5" @onSubmit="refreshDirectories"/>
-    <v-row v-if="folders" class="mx-2">
+    <v-row v-if="!emptyFolders" class="mx-2">
       <v-col v-for="(folder, index) in folders" :key="index" :cols="4">
-          <FolderCard class="w-100" :folder="folder" @onFolderEdit="refreshDirectories" />
+          <FolderCard @click="goToContacts(folder.id)" class="w-100" :folder="folder" @onFolderEdit="refreshDirectories" @onFolderDelete="refreshDirectories" />
       </v-col>
     </v-row>
     <NoData v-else/>
@@ -27,6 +27,12 @@ export default {
     }
   },
 
+  computed: {
+    emptyFolders() {
+      return this.folders?.length === 0
+    }
+  },
+
   methods: {
     fetchDirectories() {
       FolderService.getAll({}).then(result => {
@@ -38,6 +44,12 @@ export default {
 
     refreshDirectories() {
       this.fetchDirectories()
+    },
+
+
+
+    goToContacts(id) {
+      this.$router.push({ name: 'ContactList', params: {id: id}})
     }
   },
 

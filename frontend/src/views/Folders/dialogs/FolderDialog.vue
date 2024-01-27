@@ -23,9 +23,10 @@
 </template>
 
 <script lang="js" type="text/javascript">
-  import FolderService from "@/services/folderService.js";
+  import FolderService from "@/services/folderService.js"
+  import _ from 'lodash'
 
-  const DEFAULT_FOLDER = { name: '', title: '' }
+  const DEFAULT_FOLDER = { id: null, name: '', title: '' }
   export default {
     name: 'FolderDialog',
     props: {
@@ -76,7 +77,14 @@
         }
       },
 
-      editFolder() {},
+      editFolder() {
+        this.loading = true
+        FolderService.update(this.folderVal?.id, this.folderVal).then((res) => {
+          this.loading = false
+          this.closeDialog()
+          this.$emit('onSubmit')
+        })
+      },
 
       saveFolder() {
         this.loading = true
@@ -89,7 +97,7 @@
     },
 
     created() {
-      this.folderVal = this.folder || {...DEFAULT_FOLDER}
+      this.folderVal = _.cloneDeep(this.folder) || {...DEFAULT_FOLDER}
     }
   }
 </script>

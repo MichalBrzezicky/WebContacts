@@ -27,6 +27,7 @@ export default class BaseEntityService {
   }
 
   update(id, data) {
+    console.log('ID DATA', id, data)
     return axios.post(this.apiPath + '/update', data, {
       params: {id},
       headers: requestHeaders(),
