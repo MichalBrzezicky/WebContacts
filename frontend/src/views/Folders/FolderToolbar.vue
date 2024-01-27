@@ -14,36 +14,23 @@
         placeholder="Vyhledat složku nebo tel. číslo..."
       />
 
-      <v-btn @click="openDialog" icon color="primary" title="Vytvořir novou složku">
+      <v-btn @click="openDialog" icon color="primary" title="Vytvořit novou složku">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </div>
 
-    <FolderDialog v-if="folderDialog" :value="folderDialog" @onClose="closeDialog" @onSubmit="$emit('onSubmit')" />
+    <FolderDialog v-if="dialog" :value="dialog" @onClose="closeDialog" @onSubmit="$emit('onSubmit')" />
   </v-card>
 </template>
 
 <script>
   import FolderDialog from "@/views/Folders/dialogs/FolderDialog.vue";
+  import DialogMixin from "@/mixins/DialogMixin.js";
 
   export default {
     name: 'FolderToolbar',
+    mixins: [DialogMixin],
     components: { FolderDialog },
-    data() {
-      return {
-        folderDialog: false,
-      }
-    },
-
-    methods: {
-      openDialog() {
-        this.folderDialog = true
-      },
-
-      closeDialog() {
-        this.folderDialog = false
-      }
-    }
   }
 </script>
 

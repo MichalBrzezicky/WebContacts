@@ -23,6 +23,7 @@ const vuetify = createVuetify({
         colors: {
           primary: colors.teal.darken3,
           secondary: colors.teal.lighten2,
+          primaryLight: colors.teal.lighten5,
         }
       },
     },

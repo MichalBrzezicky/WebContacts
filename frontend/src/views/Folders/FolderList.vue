@@ -3,15 +3,7 @@
     <FolderToolbar class="mb-5" @onSubmit="refreshDirectories"/>
     <v-row v-if="folders" class="mx-2">
       <v-col v-for="(folder, index) in folders" :key="index" :cols="4">
-        <v-badge
-          :offset-x="25"
-          class="d-block"
-          color="error"
-          :content="folder.contacts.length.toString()"
-        >
-          <FolderCard class="w-100" :folder="folder" />
-        </v-badge>
-
+          <FolderCard class="w-100" :folder="folder" @onFolderEdit="refreshDirectories" />
       </v-col>
     </v-row>
     <NoData v-else/>
@@ -31,7 +23,6 @@ export default {
 
   data() {
     return {
-      folderDialog: false,
       folders: [],
     }
   },
