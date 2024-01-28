@@ -1,6 +1,6 @@
 <template>
   <v-card class="ma-0 pa-0">
-    <div class="mx-6 my-2 d-flex align-center justify-space-between">
+    <div class="mx-6 my-3 d-flex align-center justify-space-between">
       <v-text-field
         :bg-color="'teal-lighten-5'"
         rounded

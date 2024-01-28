@@ -5,3 +5,5 @@ class PhoneNumberService extends BaseEntityService {
     super('phone_number');
   }
 }
+
+export default new PhoneNumberService()

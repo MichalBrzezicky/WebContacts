@@ -6,7 +6,7 @@
           <FolderCard @click="goToContacts(folder.id)" class="w-100" :folder="folder" @onFolderEdit="refreshDirectories" @onFolderDelete="refreshDirectories" />
       </v-col>
     </v-row>
-    <NoData v-else/>
+    <NoData folders v-else/>
   </div>
 </template>
 
@@ -15,11 +15,9 @@ import FolderCard from "@/views/Folders/FolderCard.vue";
 import FolderToolbar from "@/views/Folders/FolderToolbar.vue";
 import NoData from "@/components/NoData.vue"
 import FolderService from "@/services/folderService.js";
-import FolderDialog from "@/views/Folders/dialogs/FolderDialog.vue";
-
 export default {
   name: 'FolderList',
-  components: {FolderDialog, FolderCard, FolderToolbar, NoData },
+  components: { FolderCard, FolderToolbar, NoData },
 
   data() {
     return {
@@ -49,7 +47,7 @@ export default {
 
 
     goToContacts(id) {
-      this.$router.push({ name: 'ContactList', params: {id: id}})
+      this.$router.push({ name: 'FolderDetail', params: {id: id}})
     }
   },
 

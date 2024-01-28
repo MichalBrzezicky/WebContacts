@@ -55,7 +55,7 @@
       },
 
       goToContacts() {
-        this.$router.push({ name: 'ContactList', params: {id: this.folder.id}})
+        this.$router.push({ name: 'FolderDetail', params: {id: this.folder.id}})
       }
     }
   }

@@ -9,7 +9,7 @@ export default class BaseEntityService {
   getAll(params) {
     return axios.get(this.apiPath + '/all', {
       headers: requestHeaders(),
-      params
+      params: params
     }).catch(e => console.log(e));
   }
 
@@ -20,9 +20,10 @@ export default class BaseEntityService {
     }).catch(e => console.log(e))
   }
 
-  add(data) {
+  add(data, id = null) {
     return axios.post(this.apiPath + '/add', data, {
-      headers: requestHeaders()
+      params: {id},
+      headers: requestHeaders(),
     }).catch(e => console.log(e))
   }
 

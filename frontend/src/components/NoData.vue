@@ -6,13 +6,12 @@
       border
       color="primary"
       type="info"
-      title="Vítejte XXX!"
+      :title="title"
       variant="tonal"
     >
       <template v-slot:text>
-        Zatím tu není žádná složka. Nejprve si vytvořte první složku pomocí tlačítka '+' v panelu výše.
-        Do složky následně přidejte Vaše kontakty.<br><br>
-        <span class="font-italic">Složky si pojmenujte dle vlastního uvážení, např: pracovní, rodinné kontakty apod.</span>
+        {{text}}<br><br>
+        <span class="font-italic">{{info}}</span>
       </template>
     </v-alert>
   </div>
@@ -20,5 +19,35 @@
 </template>
 
 <script>
+  import UserMixin from "@/mixins/UserMixin.js";
+ export default {
+   name: 'NoData',
+   mixins: [UserMixin],
+   props: {
+     folders: {
+       type: Boolean,
+       default: false,
+     },
+     contacts: {
+       type: Boolean,
+       default: false,
+     }
+   },
 
+   computed: {
+     title() {
+       if (this.folders) return 'Vítejte ' + this.getLoggedUser.name + ' ' + this.getLoggedUser.surname + '!'
+       if (this.contacts) return 'Nic se tu nenašlo!'
+     },
+
+     text() {
+       if (this.folders) return "Zatím tu není žádná složka. Vytvořte si první složku pomocí tlačítka '+' v panelu výše. Do složky následně přidejte Vaše kontakty."
+       if (this.contacts) return "Tato složka neobsahuje žádný kontakt. Vytvořte si první kontakt pomocí tlačítka '+' výše."
+     },
+
+     info() {
+       if (this.folders) return "Složky si pojmenujte dle vlastního uvážení, např: pracovní, rodinné kontakty apod."
+     },
+   }
+ }
 </script>

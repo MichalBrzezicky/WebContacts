@@ -3,7 +3,7 @@ import store from "@/store"
 import Login from "@/views/Login.vue"
 import Registration from "@/views/Registration.vue"
 import FolderList from "@/views/Folders/FolderList.vue"
-import ContactList from "@/views/Contacts/ContactList.vue";
+import FolderDetail from "@/views/Folders/FolderDetail.vue";
 
 const routes = [
   {
@@ -13,8 +13,8 @@ const routes = [
   },
   {
     path: '/folder/:id',
-    name: "ContactList",
-    component: ContactList
+    name: "FolderDetail",
+    component: FolderDetail
   },
   {
     path: '/login',

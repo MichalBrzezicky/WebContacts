@@ -8,7 +8,7 @@
         <v-divider />
         <v-card-text>
           <v-text-field :disabled="loading" v-model="folderVal.name" type="text" label="Název" placeholder="Pracovní složka" required />
-          <v-text-field :disabled="loading" v-model="folderVal.title" label="text" type="Popisek" required />
+          <v-textarea :disabled="loading" v-model="folderVal.title" type="textarea" label="Popisek" required />
         </v-card-text>
 
         <v-divider />

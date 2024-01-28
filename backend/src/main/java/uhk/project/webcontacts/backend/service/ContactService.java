@@ -29,7 +29,7 @@ public class ContactService implements BaseService<Contact> {
     }
 
     @Override
-    public List<Contact> getAll(@Nullable long folderId) {
+    public List<Contact> getAll(long folderId) {
         return contactRepository.findAllByFolderId(folderId);
     }
 

@@ -37,7 +37,6 @@ class AuthService {
 
   refreshAuthData (user) {
     const userStore = {...user}
-    console.log('EMAIL, PASSWORD AUTH', user.email, user.password)
     userStore.authData = window.btoa(user.email + ':' + user.password)
     localStorage.setItem('user', JSON.stringify(userStore))
     return Promise.resolve(userStore)

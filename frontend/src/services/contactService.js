@@ -5,3 +5,5 @@ class ContactService extends BaseEntityService {
     super('contact');
   }
 }
+
+export default new ContactService()
