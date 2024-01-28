@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <FolderToolbar class="mb-5" @onSubmit="refreshDirectories"/>
+    <FolderToolbar class="mb-5" @onSubmit="refreshDirectories" @onSearch="refreshDirectories" />
     <v-progress-circular class="mt-10" v-if="loading" :size="70" :width="7" indeterminate color="primary" />
     <v-row v-else-if="!emptyFolders" class="mx-2 text-left">
       <v-col v-for="(folder, index) in folders" :key="index" :cols="4">
@@ -34,9 +34,9 @@ export default {
   },
 
   methods: {
-    fetchDirectories() {
+    fetchDirectories(params) {
       this.loading = true
-      FolderService.getAll({}).then(result => {
+      FolderService.getAll(params).then(result => {
         if (result?.data) {
           this.folders = result.data
         }
@@ -45,8 +45,8 @@ export default {
       })
     },
 
-    refreshDirectories() {
-      this.fetchDirectories()
+    refreshDirectories(params = {}) {
+      this.fetchDirectories(params)
     },
 
 
