@@ -4,6 +4,7 @@ import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uhk.project.webcontacts.backend.model.Contact;
 import uhk.project.webcontacts.backend.model.PhoneNumber;
 import uhk.project.webcontacts.backend.repository.PhoneNumberRepository;
 import uhk.project.webcontacts.backend.system.exception.ObjectNotFoundException;
@@ -50,5 +51,12 @@ public class PhoneNumberService implements BaseService<PhoneNumber> {
         phoneNumber.setNumber(entity.getNumber());
         phoneNumber.setCodeArea(entity.getCodeArea());
         return phoneNumberRepository.save(phoneNumber);
+    }
+
+    public List<PhoneNumber> saveAll(List<PhoneNumber> phoneNumbers, Contact contact) {
+        for (PhoneNumber phoneNumber : phoneNumbers) {
+            phoneNumber.setContact(contact);
+        }
+        return phoneNumberRepository.saveAll(phoneNumbers);
     }
 }
