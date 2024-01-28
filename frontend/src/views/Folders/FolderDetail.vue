@@ -16,10 +16,23 @@
       </div>
       <v-card-text>
         <v-expansion-panels v-if="!emptyContacts" multiple>
-          <v-expansion-panel
-            v-for="(contact, index) in contacts"
-            :key="index"
-            :title="contact.name"></v-expansion-panel>
+          <v-expansion-panel v-for="(contact, index) in contacts" :key="index">
+            <v-expansion-panel-title>{{ contact.name }}</v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list class="pa-0 ma-0">
+                <v-list-item class="pa-0 ma-0">
+                  <v-list-item v-for="(phoneNumber, i) in contact.phoneNumbers" :key="i" :value="phoneNumber">
+                    <template v-slot:prepend>
+                      <v-icon icon="mdi-phone" />
+                    </template>
+
+                    <v-list-item-title>+{{phoneNumber.codeArea}} {{phoneNumber.number}}</v-list-item-title>
+                  </v-list-item>
+                </v-list-item>
+              </v-list>
+            </v-expansion-panel-text>
+
+          </v-expansion-panel>
         </v-expansion-panels>
         <NoData contacts v-else />
       </v-card-text>
@@ -90,3 +103,10 @@
   }
 
 </script>
+
+<style scoped>
+  .v-expansion-panel-content>>> .v-expansion-panel-content__wrap {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+</style>
