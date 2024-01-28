@@ -1,0 +1,40 @@
+version: '3.6'
+services:
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      POSTGRES_PASSWORD: 'top_secret'
+      POSTGRES_USER: root
+      POSTGRES_DB: web_contacts
+    networks:
+      - backenddatabase
+
+  backend:
+    build:
+      context: ./backend
+      target: finalApp
+    image: brzezicky/web-contacts-backend
+    container_name: backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - frontendbackend
+      - backenddatabase
+
+  frontend:
+    build: ./frontend
+    image: brzezicky/web-contacts-frontend
+    container_name: frontend
+    ports:
+      - 5173:5173
+    depends_on:
+      - backend
+    networks:
+      - frontendbackend
+
+networks:
+  backenddatabase: {}
+  frontendbackend: {}
