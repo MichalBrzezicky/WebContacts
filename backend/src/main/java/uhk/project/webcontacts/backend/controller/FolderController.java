@@ -32,9 +32,9 @@ public class FolderController {
     }
 
     @GetMapping("/all")
-    public List<Folder> getFolders(@AuthenticationPrincipal UserPrincipal userDetails) {
+    public List<Folder> getFolders(@AuthenticationPrincipal UserPrincipal userDetails, String search) {
         User user = userDetails.getUser();
-        return folderService.getAll(userDetails.getUser());
+        return folderService.getAll(userDetails.getUser(), search);
     }
 
     @PostMapping("/update")

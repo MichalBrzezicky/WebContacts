@@ -1,5 +1,6 @@
 package uhk.project.webcontacts.backend.service;
 
+import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class FolderService implements BaseService<Folder> {
         return folderRepository.findByUserId(userId);
     }
 
-    public List<Folder> getAll(User user) {
+    public List<Folder> getAll(User user, @Nullable String search) {
+        if (search != null) return folderRepository.findByUserAndSearch(user.getId(), search);
         return folderRepository.findByUser(user);
     }
 
