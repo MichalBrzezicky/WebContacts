@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="text-center">
     <FolderToolbar class="mb-5" @onSubmit="refreshDirectories"/>
-    <v-row v-if="!emptyFolders" class="mx-2">
+    <v-progress-circular class="mt-10" v-if="loading" :size="70" :width="7" indeterminate color="primary" />
+    <v-row v-else-if="!emptyFolders" class="mx-2 text-left">
       <v-col v-for="(folder, index) in folders" :key="index" :cols="4">
           <FolderCard @click="goToContacts(folder.id)" class="w-100" :folder="folder" @onFolderEdit="refreshDirectories" @onFolderDelete="refreshDirectories" />
       </v-col>
@@ -21,6 +22,7 @@ export default {
 
   data() {
     return {
+      loading: false,
       folders: [],
     }
   },
@@ -33,11 +35,14 @@ export default {
 
   methods: {
     fetchDirectories() {
+      this.loading = true
       FolderService.getAll({}).then(result => {
-          if (result?.data) {
-            this.folders = result.data
-          }
-        })
+        if (result?.data) {
+          this.folders = result.data
+        }
+      }).finally(() => {
+          this.loading = false
+      })
     },
 
     refreshDirectories() {

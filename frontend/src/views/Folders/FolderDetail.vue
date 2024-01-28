@@ -6,7 +6,12 @@
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
         <div>
-          <v-card-title>{{ folder.name }}</v-card-title>
+          <v-card-title class="pt-4 pr-0 d-flex align-center">
+            <v-badge :offset-y="-2" :offset-x="2" :content="folder.contacts.length.toString()" >
+              <v-icon size="small" icon="mdi-folder-open" />
+            </v-badge>
+            <span class="pl-3">{{ folder.name }}</span>
+          </v-card-title>
           <v-card-subtitle>{{ folder.title }}</v-card-subtitle>
         </div>
         <v-spacer />
@@ -14,8 +19,10 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </div>
-      <v-card-text>
-        <v-expansion-panels v-if="!emptyContacts" multiple>
+      <v-card-text class="text-center">
+
+        <v-progress-circular v-if="loadingContacts || loading" class="mt-10"  :size="70" :width="7" indeterminate color="primary" />
+        <v-expansion-panels v-else-if="!emptyContacts" class="text-left" multiple>
           <v-expansion-panel v-for="(contact, index) in contacts" :key="index">
             <v-expansion-panel-title>{{ contact.name }}</v-expansion-panel-title>
             <v-expansion-panel-text>
@@ -26,7 +33,7 @@
                       <v-icon icon="mdi-phone" />
                     </template>
 
-                    <v-list-item-title>+{{phoneNumber.codeArea}} {{phoneNumber.number}}</v-list-item-title>
+                    <v-list-item-title>+ ({{phoneNumber.codeArea}}) {{phoneNumber.number}}</v-list-item-title>
                   </v-list-item>
                 </v-list-item>
               </v-list>
@@ -34,7 +41,7 @@
 
           </v-expansion-panel>
         </v-expansion-panels>
-        <NoData contacts v-else />
+        <NoData class="text-left" contacts v-else />
       </v-card-text>
     </v-card>
 
@@ -48,14 +55,17 @@
   import ContactDialog from "@/views/Contacts/dialogs/ContactDialog.vue";
   import ContactService from "@/services/contactService.js";
   import NoData from "@/components/NoData.vue";
+  import FolderToolbar from "@/views/Folders/FolderToolbar.vue";
 
   export default {
     name: 'FolderDetail',
     mixins: [DialogMixin],
-    components: {NoData, ContactDialog},
+    components: {FolderToolbar, NoData, ContactDialog},
     data() {
       return {
         id: null,
+        loading: false,
+        loadingContacts: false,
         folder: {
           name: '',
           title: '',
@@ -66,16 +76,22 @@
 
     methods: {
       fetchFolder() {
+        this.loading = true
         FolderService.getById(this.id).then(result => {
           if (result?.data) this.folder = result?.data
+        }).finally(() => {
+          this.loading = false
         })
       },
 
       refreshContacts() {
+        this.loadingContacts = true
         ContactService.getAll({id: this.id}).then((result) => {
           if (result?.data) {
             this.folder.contacts = result.data
           }
+        }).finally(() => {
+          this.loadingContacts = false
         })
       },
 
