@@ -20,26 +20,9 @@
         </v-btn>
       </div>
       <v-card-text class="text-center">
-
         <v-progress-circular v-if="loadingContacts || loading" class="mt-10"  :size="70" :width="7" indeterminate color="primary" />
         <v-expansion-panels v-else-if="!emptyContacts" class="text-left" multiple>
-          <v-expansion-panel v-for="(contact, index) in contacts" :key="index">
-            <v-expansion-panel-title>{{ contact.name }}</v-expansion-panel-title>
-            <v-expansion-panel-text>
-              <v-list class="pa-0 ma-0">
-                <v-list-item class="pa-0 ma-0">
-                  <v-list-item v-for="(phoneNumber, i) in contact.phoneNumbers" :key="i" :value="phoneNumber">
-                    <template v-slot:prepend>
-                      <v-icon icon="mdi-phone" />
-                    </template>
-
-                    <v-list-item-title>+ ({{phoneNumber.codeArea}}) {{phoneNumber.number}}</v-list-item-title>
-                  </v-list-item>
-                </v-list-item>
-              </v-list>
-            </v-expansion-panel-text>
-
-          </v-expansion-panel>
+          <ContactExpansionPanel v-for="(contact, index) in contacts" :key="index" :contact="contact"/>
         </v-expansion-panels>
         <NoData class="text-left" contacts v-else />
       </v-card-text>
@@ -56,11 +39,12 @@
   import ContactService from "@/services/contactService.js";
   import NoData from "@/components/NoData.vue";
   import FolderToolbar from "@/views/Folders/FolderToolbar.vue";
+  import ContactExpansionPanel from "@/views/Contacts/ContactExpansionPanel.vue";
 
   export default {
     name: 'FolderDetail',
     mixins: [DialogMixin],
-    components: {FolderToolbar, NoData, ContactDialog},
+    components: {ContactExpansionPanel, FolderToolbar, NoData, ContactDialog},
     data() {
       return {
         id: null,
@@ -117,12 +101,4 @@
       }
     }
   }
-
 </script>
-
-<style scoped>
-  .v-expansion-panel-content>>> .v-expansion-panel-content__wrap {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-</style>

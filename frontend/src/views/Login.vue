@@ -72,7 +72,7 @@
         this.$store.dispatch("auth/login", this.user).then(
           data => this.$router.push(this.returnUrl),
           error => {
-            console.log(error)
+            console.error(error)
             this.error = error?.response?.data?.message || 'Nastala neočekávaná chyba';
             this.loading = false;
           }

@@ -4,7 +4,7 @@
       <v-text-field v-model="phoneNumber.codeArea" hide-details type="text" label="Předčíslí" prepend-inner-icon="mdi-plus" variant="outlined" class="pr-2" style="max-width: 150px" placeholder="420" required />
       <v-text-field v-model="phoneNumber.number" hide-details type="text" label="Telefonní číslo" placeholder="72648953" variant="outlined" />
 
-      <v-icon v-if="index > 0" class="px-4 ml-2" @click="removePhoneNum(index)">mdi-close</v-icon>
+      <v-icon class="px-4 ml-2" @click="removePhoneNum(index)">mdi-close</v-icon>
     </div>
 
     <v-btn class="mt-3" size="small" variant="text" @click="addNextPhoneNum">

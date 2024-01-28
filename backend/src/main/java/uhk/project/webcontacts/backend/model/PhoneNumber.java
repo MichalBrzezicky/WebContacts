@@ -16,11 +16,11 @@ public class PhoneNumber {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Size(max = 3, min = 3, message = "Předčíslí musí obsahovat přesně 3 čísla")
+    @Size(max = 6, min = 2, message = "Předčíslí musí obsahovat 2-6 čísel")
     @Column(name = "codeArea", nullable = false, columnDefinition = "TEXT")
     private String codeArea;
 
-    @Size(max = 9, min = 9, message = "Telefonní číslo musí obsahovat přesně 9 čísel")
+    @Size(max = 20, min = 5, message = "Telefonní číslo musí obsahovat 5-20 čísel")
     @Column(name = "number", nullable = false, columnDefinition = "TEXT")
     private String number;
 

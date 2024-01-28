@@ -31,8 +31,10 @@ public class ContactController {
         contact.setFolder(folder);
         List<PhoneNumber> phoneNumbers = contact.getPhoneNumbers();
         contact.setPhoneNumbers(new ArrayList());
+
         Contact savedContact = contactService.add(contact);
-        phoneNumberService.saveAll(phoneNumbers, savedContact);
+
+        if (!phoneNumbers.isEmpty()) phoneNumberService.saveAll(phoneNumbers, savedContact);
 
         return new Result(true, StatusCode.SUCCESS, "Kontakt byl úspěšně vytvořen", savedContact);
     }
