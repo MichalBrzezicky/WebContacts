@@ -22,7 +22,7 @@
       <v-card-text class="text-center">
         <v-progress-circular v-if="loadingContacts || loading" class="mt-10"  :size="70" :width="7" indeterminate color="primary" />
         <v-expansion-panels v-else-if="!emptyContacts" class="text-left" multiple>
-          <ContactExpansionPanel v-for="(contact, index) in contacts" :key="index" :contact="contact"/>
+          <ContactExpansionPanel v-for="(contact, index) in contacts" :key="index" :contact="contact" @onContactDelete="refreshContacts"/>
         </v-expansion-panels>
         <NoData class="text-left" contacts v-else />
       </v-card-text>

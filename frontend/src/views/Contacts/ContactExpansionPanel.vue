@@ -47,6 +47,7 @@
         return [
           {title: 'Přejmenovat kontakt', icon: 'mdi-pencil', action: this.openDialog},
           {title: 'Přidat telefonní čísla', icon: 'mdi-plus', action: this.openPhoneNumbersDialog},
+          {title: 'Odstranit kontakt', icon: 'mdi-delete', action: this.removeContact},
         ]
       },
     },
@@ -58,6 +59,12 @@
           if (res?.data) this.contactLocal = res.data
         }).finally(() => {
           this.loading = false
+        })
+      },
+
+      removeContact() {
+        ContactService.delete(this.contactLocal.id).then(result => {
+          this.$emit('onContactDelete')
         })
       },
 
